@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   BriefcaseBusiness,
   Braces,
   Code2,
   Database,
-  Download as Downloaden,
+  Download,
   ExternalLink,
   GraduationCap,
   Mail,
@@ -31,102 +31,124 @@ function GitHubLogo({ size = 16 }) {
   );
 }
 
-const vaardigheidsgroepen = [
+const skillGroups = [
   {
-    title: 'Programmeertalen',
+    title: 'Languages',
     icon: Braces,
-    desc: 'Talen waarmee ik applicaties, logica en technische oplossingen uitwerk.',
-    items: ['Java', 'JavaScript', 'TypeScript', 'Python'],
+    desc: 'Languages I use to build logic, applications and technical solutions.',
+    items: ['Java', 'JavaScript', 'TypeScript', 'SQL', 'Python'],
   },
   {
-    title: 'Applicatieontwikkeling',
+    title: 'Backend',
     icon: Terminal,
-    desc: 'Backend, API en frontend samenbrengen tot bruikbare applicaties.',
-    items: ['Spring Boot', 'REST API', 'Postman', 'Vue', 'React', 'UX/UI'],
+    desc: 'Backend fundamentals for reliable APIs and maintainable applications.',
+    items: ['Spring Boot', 'REST APIs', 'Hibernate', 'Maven', 'Postman'],
   },
   {
-    title: 'Testen',
-    icon: ShieldCheck,
-    desc: 'Kritieke paden afdekken, edge cases vinden en kwaliteit concreet maken.',
-    items: ['Manueel testen', 'Playwright', 'E2E-testen', 'API-testen', 'Testscenario\'s', 'Bugrapportage'],
+    title: 'Frontend',
+    icon: Code2,
+    desc: 'Interfaces with attention for structure, usability and user experience.',
+    items: ['Vue', 'React', 'Tailwind', 'HTML', 'CSS', 'UX/UI'],
   },
   {
-    title: 'Data en rapportage',
+    title: 'Databases',
     icon: Database,
-    desc: 'Data begrijpen, structureren en vertalen naar inzichten die bruikbaar zijn voor de business.',
-    items: ['SQL', 'Databankontwerp', 'ERD', 'Power BI', 'Excel', 'MySQL', 'MongoDB'],
+    desc: 'Data modelling, querying and turning information into useful insight.',
+    items: ['MySQL', 'MongoDB', 'Database design', 'ERD', 'Excel'],
   },
   {
-    title: 'Analyse en processen',
+    title: 'Testing & Analysis',
+    icon: ShieldCheck,
+    desc: 'Quality-focused work from requirements to automated test coverage.',
+    items: ['Playwright', 'Manual testing', 'User stories', 'Scrum', 'Agile', 'UML', 'BPMN'],
+  },
+  {
+    title: 'Tools',
     icon: BriefcaseBusiness,
-    desc: 'Businessnoden analyseren, processen modelleren en werkbaar vertalen naar software.',
-    items: ['Functionele analyse', 'User stories', 'Scrum', 'Agile', 'UML', 'BPMN'],
-  },
-  {
-    title: 'Tools en platformen',
-    icon: Terminal,
-    desc: 'Samenwerking, documentatie en platformen ondersteunen binnen een bedrijfscontext.',
-    items: ['Figma', 'Jira', 'Confluence', 'GitHub', 'Salesforce', 'UIPath', 'Outsystems', 'Linux'],
+    desc: 'Tools I use for collaboration, documentation, development and reporting.',
+    items: ['Git', 'GitHub', 'Docker', 'Figma', 'Jira', 'Confluence', 'IntelliJ', 'VS Code', 'Power BI'],
   },
 ];
 
-const projecten = [
+const projects = [
   {
-    title: 'SmartFormFill',
-    badge: 'Businessproject',
-    problem: 'Formulieren invullen kostte veel tijd en veroorzaakte fouten.',
-    solution: 'Een flow die invoer structureert en automatische suggesties geeft.',
-    contribution: 'Analyse, UX-structuur, frontendlogica en testscenario\'s.',
-    tech: ['JavaScript', 'Vue', 'Playwright', 'SQL'],
+    title: 'MSQTO',
+    badge: 'Internship case study',
+    summary: 'A testing and UX-focused internship project around multitenancy, workflows and software quality.',
+    problem: 'Teams needed more reliable flows, clearer user interaction and better confidence in critical application paths.',
+    solution: 'Improved UX/UI flows, translated requirements into user stories and added automated Playwright tests.',
+    contribution: 'Project management tasks, UX/UI support, user stories, Scrum/Agile coordination and automated testing.',
+    role: 'Software Tester & Software Management Intern',
+    learned: 'How to combine project coordination, user stories, UX decisions and automated testing in a real business context.',
+    tech: ['Playwright', 'Figma', 'Testing', 'UX/UI', 'Multitenancy', 'SQL', 'Scrum', 'Agile'],
+    github: null,
+    demo: null,
   },
   {
-    title: 'Mosquito Tool',
-    badge: 'Stageproject',
-    problem: 'Teams hadden nood aan stabiele multitenancy-ondersteuning en betrouwbaar testen.',
-    solution: 'UI-flows verbeterd en E2E-testen uitgewerkt voor kritieke paden.',
-    contribution: 'Testen met Playwright, frontend-bijdragen, analyse en documentatie.',
-    tech: ['Playwright', 'Figma', 'JavaScript', 'Jira'],
+    title: 'SmartFormFill',
+    badge: 'Business project',
+    summary: 'A form assistance concept focused on reducing repetitive input and improving data quality.',
+    problem: 'Filling in forms manually took time and increased the risk of mistakes.',
+    solution: 'Designed a structured flow with clearer input handling and automatic suggestions.',
+    contribution: 'Analysis, UX structure, frontend logic and test scenarios.',
+    role: 'Analyst & Frontend Contributor',
+    learned: 'How small UX decisions can reduce friction and make business processes easier to complete.',
+    tech: ['JavaScript', 'Vue', 'Playwright', 'SQL'],
+    github: null,
+    demo: null,
   },
   {
     title: 'ZVK Onder den Toren Veulen',
-    badge: 'Eigen project',
-    problem: 'De club had geen centrale, duidelijke digitale plek.',
-    solution: 'Een toegankelijke oplossing gebouwd met focus op duidelijkheid en onderhoudbaarheid.',
-    contribution: 'Volledige uitwerking: analyse, ontwikkeling, testen en iteratieve verbeteringen.',
+    badge: 'Personal project',
+    summary: 'A club-focused digital platform built with clarity, maintainability and simple content access in mind.',
+    problem: 'The club needed one clear digital place for information and communication.',
+    solution: 'Built an accessible solution with a simple structure and maintainable content flow.',
+    contribution: 'Full project ownership: analysis, development, testing and iterative improvements.',
+    role: 'Full Project Owner',
+    learned: 'How to balance technical implementation with real users who need a simple and reliable website.',
     tech: ['React', 'GitHub', 'SQL'],
+    github: 'https://github.com/Arjen-Coenegracht',
+    demo: null,
   },
   {
     title: 'Connect 4',
     badge: 'Java project',
-    problem: 'Doel was om logica, structuur en edge cases correct af te dekken.',
-    solution: 'Spelregels robuust geimplementeerd met focus op leesbare code.',
-    contribution: 'Kernlogica van het spel, UI-afwerking en testdenken.',
+    summary: 'A game logic project focused on clean structure, edge cases and reliable rule implementation.',
+    problem: 'The goal was to correctly handle game rules, win detection and edge cases.',
+    solution: 'Implemented the core logic with readable code and a structured approach to validation.',
+    contribution: 'Game logic, UI finishing and test-minded checks.',
+    role: 'Java Developer',
+    learned: 'How to think through edge cases and translate rules into maintainable code.',
     tech: ['Java', 'TypeScript'],
+    github: null,
+    demo: null,
   },
 ];
 
-const traject = [
+const experience = [
   {
     date: '2022 - 2026',
     role: 'Bachelor Toegepaste Informatica',
-    org: 'Afstudeerrichting Software Management',
-    desc: 'Afgestudeerd met focus op business en IT-afstemming, analyse, testen, projectwerking, communicatie en procesmatig verbeteren.',
+    org: 'Software Management',
+    desc: 'Graduated with a focus on business and IT alignment, analysis, testing, project work, communication and process improvement.',
   },
   {
     date: '2026',
-    role: 'Stage - PXL Smart ICT',
-    org: 'Praktijkervaring in Software Management',
-    desc: 'Nam projectmanagementtaken op en werkte mee aan UX/UI, het opstellen van user stories en het organiseren van het werk binnen een Scrum- en Agile-context. Daarnaast schreef ik geautomatiseerde testen om de kwaliteit van de applicatie te ondersteunen.',
+    role: 'Internship',
+    org: 'PXL Smart ICT',
+    desc: 'Took on project management tasks, worked on UX/UI, wrote user stories, supported Scrum and Agile workflows and created automated tests.',
   },
   {
-    date: 'Heden',
-    role: 'Junior IT-professional',
-    org: 'Software Management, analyse en testing',
-    desc: 'Richt zich op de brug tussen business en IT, met aandacht voor analyse, testing, projectwerking, duidelijke communicatie en continue verbetering.',
+    date: 'Today',
+    role: 'Junior IT Professional',
+    org: 'Building personal projects and growing across IT domains',
+    desc: 'Focused on software management, testing, analysis, data and the bridge between business needs and technical solutions.',
   },
 ];
 
 function App() {
+  const [openProject, setOpenProject] = useState(projects[0].title);
+
   useEffect(() => {
     const glow = document.querySelector('.cursor-glow');
     const moveGlow = (event) => {
@@ -144,107 +166,79 @@ function App() {
 
       <header className="site-header">
         <a href="#home" className="nav-logo"><span>~/</span>arjen-coenegracht<span>.dev</span></a>
-        <nav aria-label="Hoofdnavigatie">
-          <a href="#over-mij">over mij</a>
-          <a href="#vaardigheden">vaardigheden</a>
-          <a href="#projecten">projecten</a>
-          <a href="#traject">traject</a>
-          <a href="#contact">contact</a>
+        <nav aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
         </nav>
       </header>
 
       <main>
         <section id="home" className="hero">
           <div className="hero-grid">
-            <div className="code-bio" aria-label="Code profiel van Arjen">
+            <div className="code-bio" aria-label="Code profile of Arjen">
               <p><span className="c-comment">// who_am_i.ts</span></p>
               <p><span className="c-keyword">const</span> <span className="c-value">profile</span> <span className="c-punct">=</span> <span className="c-brace">{'{'}</span></p>
-              <p className="indent"><span className="c-prop">naam</span><span className="c-punct">:</span> <span className="c-string">"Arjen Coenegracht"</span><span className="c-punct">,</span></p>
-              <p className="indent"><span className="c-prop">diploma</span><span className="c-punct">:</span> <span className="c-string">"Toegepaste Informatica"</span><span className="c-punct">,</span></p>
+              <p className="indent"><span className="c-prop">name</span><span className="c-punct">:</span> <span className="c-string">"Arjen Coenegracht"</span><span className="c-punct">,</span></p>
+              <p className="indent"><span className="c-prop">degree</span><span className="c-punct">:</span> <span className="c-string">"Applied Computer Science"</span><span className="c-punct">,</span></p>
               <p className="indent"><span className="c-prop">focus</span><span className="c-punct">:</span> <span className="c-string">"Software Management"</span><span className="c-punct">,</span></p>
-              <p className="indent"><span className="c-prop">werkt_met</span><span className="c-punct">:</span> <span className="c-brace">[</span><span className="c-string">"ontwikkeling"</span><span className="c-punct">,</span> <span className="c-string">"testen"</span><span className="c-punct">,</span> <span className="c-string">"analyse"</span><span className="c-brace">]</span><span className="c-punct">,</span></p>
-              <p className="indent"><span className="c-prop">tools</span><span className="c-punct">:</span> <span className="c-brace">[</span><span className="c-string">"Java"</span><span className="c-punct">,</span> <span className="c-string">"Spring Boot"</span><span className="c-punct">,</span> <span className="c-string">"Vue"</span><span className="c-punct">,</span> <span className="c-string">"SQL"</span><span className="c-punct">,</span> <span className="c-string">"Jira"</span><span className="c-brace">]</span><span className="c-punct">,</span></p>
-              <p className="indent"><span className="c-prop">beschikbaar_voor</span><span className="c-punct">:</span> <span className="c-string">"junior IT-kansen"</span></p>
+              <p className="indent"><span className="c-prop">works_with</span><span className="c-punct">:</span> <span className="c-brace">[</span><span className="c-string">"testing"</span><span className="c-punct">,</span> <span className="c-string">"data"</span><span className="c-punct">,</span> <span className="c-string">"analysis"</span><span className="c-brace">]</span><span className="c-punct">,</span></p>
+              <p className="indent"><span className="c-prop">tools</span><span className="c-punct">:</span> <span className="c-brace">[</span><span className="c-string">"Jira"</span><span className="c-punct">,</span> <span className="c-string">"Confluence"</span><span className="c-punct">,</span> <span className="c-string">"Figma"</span><span className="c-punct">,</span> <span className="c-string">"Playwright"</span><span className="c-punct">,</span> <span className="c-string">"SQL"</span><span className="c-brace">]</span><span className="c-punct">,</span></p>
+              <p className="indent"><span className="c-prop">mindset</span><span className="c-punct">:</span> <span className="c-string">"always learning"</span></p>
               <p><span className="c-brace">{'}'}</span><span className="c-punct">;</span></p>
               <p><span className="c-keyword">export default</span> profile<span className="c-punct">;</span></p>
-              <p><span className="c-comment">// klaar om bij te dragen</span><span className="cursor">_</span></p>
+              <p><span className="c-comment">// ready to contribute</span><span className="cursor">_</span></p>
             </div>
 
             <div className="hero-copy">
-              <p className="eyebrow">Beschikbaar voor kansen</p>
               <h1>
                 Arjen<br />
                 <em>Coenegracht</em>
               </h1>
-              <p className="hero-title">Softwareontwikkeling - Testen - Business en IT-afstemming</p>
+              <p className="hero-title">Software Management Graduate</p>
               <p className="hero-intro">
-                Afgestudeerd in Toegepaste Informatica - Software Management, met focus op ontwikkeling, testen,
-                UX/UI, analyse en de brug tussen business en IT.
+                I build reliable software with a strong focus on quality, testing, data and user experience.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary" href="#projecten">Bekijk projecten <ExternalLink size={15} /></a>
-                <a className="btn btn-ghost" href="/Arjen-CV.pdf" download><Downloaden size={15} /> CV downloaden</a>
+                <a className="btn btn-primary" href="/Arjen-CV.pdf" download><Download size={15} /> Download CV</a>
+                <a className="btn btn-ghost" href="#projects">View Projects <ExternalLink size={15} /></a>
+                <a className="btn btn-ghost" href="#contact"><Mail size={15} /> Contact Me</a>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="over-mij" className="content-section over-mij-sectie">
-          <p className="section-label">01 / over mij</p>
-          <h2 className="section-title">De persoon <span>achter de code</span></h2>
-          <div className="over-mij-grid">
-            <div className="over-mij-tekst">
+        <section id="about" className="content-section about-section">
+          <p className="section-label">01 / about</p>
+          <h2 className="section-title">Business, quality <span>and technology</span></h2>
+          <div className="about-grid">
+            <div className="about-text">
               <p>
-                Mijn achtergrond in Software Management heeft me een brede kijk gegeven op software en de manier waarop
-                technologie, processen en gebruikers samenkomen. Ik heb geleerd niet alleen te kijken naar hoe een
-                toepassing gebouwd wordt, maar ook naar wat er nodig is, hoe gebruikers ermee werken en hoe je kwaliteit
-                bewaakt van analyse tot oplevering.
+                I combine business and IT through a Software Management background. I enjoy translating needs into
+                clear requirements, user stories and practical solutions that make sense for both users and teams.
               </p>
               <p>
-                Ik zie mezelf als iemand die de brug slaat tussen business en IT. Ik denk graag functioneel mee over
-                oplossingen, maar duik ook zonder probleem de technische kant in wanneer dat nodig is. Die combinatie
-                helpt me om noden snel te begrijpen, realistische oplossingen uit te werken en vlot te schakelen
-                tussen gebruikers, processen en technologie.
+                My strongest interests are testing, SQL and data, because they connect quality with insight. I like
+                making software reliable, understandable and useful instead of only technically complete.
               </p>
               <p>
-                Mijn interesse ligt vooral bij testen, SQL en data, omdat daar voor mij de link zit tussen kwaliteit,
-                inzicht en concrete meerwaarde. Ik haal voldoening uit software niet alleen werkend te maken, maar ook
-                betrouwbaar, logisch en bruikbaar.
-              </p>
-              <p>
-                Ook buiten mijn opleiding ben ik me blijven verdiepen in IT. Zo bouw ik eigen applicaties, bijvoorbeeld met een
-                Java Spring Boot-backend en een Vue-frontend, inclusief databank, API's en testen. Op die manier blijf
-                ik mezelf technisch uitdagen en verbreed ik mijn kennis in ontwikkeling, data en softwarekwaliteit.
-              </p>
-              <p>
-                Mijn sterkte ligt in de combinatie van analytisch denken, technisch inzicht, leergierigheid en
-                gestructureerd werken. Ik werk graag aan oplossingen die niet alleen technisch kloppen, maar ook echt
-                waarde hebben voor de gebruiker of organisatie.
+                Next to my studies and internship, I keep building personal projects with Java Spring Boot, Vue,
+                databases, APIs and automated tests to keep learning across different IT domains.
               </p>
             </div>
-            <aside className="profile-card" aria-label="Profielgegevens">
-              <img src={drawnPortrait} alt="Getekend portret van Arjen" />
-              <div>
-                <div className="stat-number">2026</div>
-                <div className="stat-label">afgestudeerd in toegepaste informatica</div>
-              </div>
-              <div>
-                <div className="stat-number">4</div>
-                <div className="stat-label">uitgelichte projecten</div>
-              </div>
-              <div>
-                <div className="stat-number">3</div>
-                <div className="stat-label">programmeertalen</div>
-              </div>
+            <aside className="profile-card" aria-label="Profile facts">
+              <img src={drawnPortrait} alt="Drawn portrait of Arjen" />
             </aside>
           </div>
         </section>
 
-        <section id="vaardigheden" className="content-section">
-          <p className="section-label">02 / vaardigheden</p>
-          <h2 className="section-title">Waar ik <span>mee werk</span></h2>
-          <div className="vaardigheden-grid">
-            {vaardigheidsgroepen.map((group) => {
+        <section id="skills" className="content-section">
+          <p className="section-label">02 / skills</p>
+          <h2 className="section-title">Technical <span>toolkit</span></h2>
+          <div className="skills-grid">
+            {skillGroups.map((group) => {
               const Icon = group.icon;
               return (
                 <article className="skill-card" key={group.title}>
@@ -262,36 +256,65 @@ function App() {
           </div>
         </section>
 
-        <section id="projecten" className="content-section">
-          <p className="section-label">03 / projecten</p>
-          <h2 className="section-title">Projecten die <span>richting geven</span></h2>
-          <div className="projecten-lijst">
-            {projecten.map((project, index) => (
-              <article className="project-card" key={project.title}>
-                <span className="project-number">#{String(index + 1).padStart(3, '0')}</span>
-                <div>
-                  <p className="project-badge">{project.badge}</p>
-                  <h3>{project.title}</h3>
-                  <p><strong>Probleem:</strong> {project.problem}</p>
-                  <p><strong>Oplossing:</strong> {project.solution}</p>
-                  <p><strong>Mijn bijdrage:</strong> {project.contribution}</p>
-                  <div className="project-stack">
-                    {project.tech.map((tag) => (
-                      <span className="stack-pill" key={tag}>{tag}</span>
-                    ))}
+        <section id="projects" className="content-section">
+          <p className="section-label">03 / projects</p>
+          <h2 className="section-title">Selected <span>case work</span></h2>
+          <div className="projects-list">
+            {projects.map((project, index) => {
+              const isOpen = openProject === project.title;
+              return (
+                <article className={`project-card ${isOpen ? 'is-open' : ''}`} key={project.title}>
+                  <button
+                    className="project-toggle"
+                    type="button"
+                    onClick={() => setOpenProject(isOpen ? '' : project.title)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="project-number">#{String(index + 1).padStart(3, '0')}</span>
+                    <span className="project-visual" aria-hidden="true">{project.title.slice(0, 2).toUpperCase()}</span>
+                  </button>
+                  <div className="project-content">
+                    <p className="project-badge">{project.badge}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.summary}</p>
+                    <div className="project-stack">
+                      {project.tech.map((tag) => (
+                        <span className="stack-pill" key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                    {isOpen && (
+                      <div className="project-details">
+                        <p><strong>Problem:</strong> {project.problem}</p>
+                        <p><strong>Solution:</strong> {project.solution}</p>
+                        <p><strong>My role:</strong> {project.role}</p>
+                        <p><strong>What I did:</strong> {project.contribution}</p>
+                        <p><strong>What I learned:</strong> {project.learned}</p>
+                        <div className="project-actions">
+                          {project.github ? (
+                            <a className="project-link" href={project.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={14} /></a>
+                          ) : (
+                            <span className="project-link muted-link">GitHub private</span>
+                          )}
+                          {project.demo ? (
+                            <a className="project-link" href={project.demo} target="_blank" rel="noreferrer">Live Demo <ExternalLink size={14} /></a>
+                          ) : (
+                            <span className="project-link muted-link">Live demo unavailable</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-                <a className="project-link" href="#contact">Vraag details <ExternalLink size={14} /></a>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </section>
 
-        <section id="traject" className="content-section">
-          <p className="section-label">04 / traject</p>
-          <h2 className="section-title">Mijn <span>traject</span></h2>
+        <section id="experience" className="content-section">
+          <p className="section-label">04 / experience</p>
+          <h2 className="section-title">Education and <span>experience</span></h2>
           <div className="timeline">
-            {traject.map((item) => (
+            {experience.map((item) => (
               <article className="timeline-item" key={`${item.date}-${item.role}`}>
                 <p className="timeline-date">{item.date}</p>
                 <h3>{item.role}</h3>
@@ -305,51 +328,55 @@ function App() {
         <section className="content-section split-section">
           <article className="info-card">
             <GraduationCap size={24} />
-            <h2>Ambitie</h2>
+            <h2>Ambition</h2>
             <p>
-              Verder groeien als brede IT-professional door voortdurend bij te leren over softwareontwikkeling,
-              AI, security, testing, analyse en projectmatig werken. Ik wil nieuwe technologieen begrijpen,
-              praktisch toepassen en blijven ontdekken waar IT echte waarde kan creëren.
+              I want to keep growing as a broad IT professional by learning more about AI, security, testing,
+              data, software development and project management. I like exploring how technology can create real value.
             </p>
           </article>
           <article className="info-card">
             <Terminal size={24} />
-            <h2>Wat ik meebreng</h2>
+            <h2>What I bring</h2>
             <div className="workflow">
-              <span>Analytisch denken</span>
-              <span>Leergierigheid</span>
-              <span>Business en IT verbinden</span>
-              <span>Projectmatig werken</span>
-              <span>Kwaliteitsgericht testen</span>
+              <span>Analytical thinking</span>
+              <span>Learning mindset</span>
+              <span>Business and IT alignment</span>
+              <span>Project-oriented work</span>
+              <span>Quality-focused testing</span>
             </div>
           </article>
         </section>
 
         <section id="contact" className="content-section contact-section">
           <p className="section-label">05 / contact</p>
-          <h2 className="section-title">Laten we <span>connecten</span></h2>
+          <h2 className="section-title">Let us <span>connect</span></h2>
           <div className="contact-inner">
             <div>
-              <p className="contact-cta">Beschikbaar voor junior rollen en projecten waar IT waarde zichtbaar maakt.</p>
+              <p className="contact-cta">Interested in junior roles and projects where IT creates visible value.</p>
               <p className="contact-sub">
-                Vooral geinteresseerd in ontwikkeling, testen, analyse en rollen waar business en IT elkaar versterken.
+                Interested in testing, analysis, data, software management and roles where business and IT strengthen each other.
               </p>
-              <a className="btn btn-primary" href="mailto:arjencoenegracht@hotmail.com">Stuur een e-mail <Mail size={15} /></a>
+              <a className="btn btn-primary" href="mailto:arjencoenegracht@hotmail.com">Send an email <Mail size={15} /></a>
             </div>
             <div className="contact-list">
-              <a href="mailto:arjencoenegracht@hotmail.com"><Mail size={16} /><span><small>e-mail</small>arjencoenegracht@hotmail.com</span></a>
-              <a href="https://www.linkedin.com/in/arjen-coenegracht-0643a92a0/" target="_blank" rel="noreferrer"><LinkedInLogo size={16} /><span><small>linkedin</small>LinkedIn profiel</span></a>
-              <a href="https://github.com/Arjen-Coenegracht" target="_blank" rel="noreferrer"><GitHubLogo size={16} /><span><small>github</small>GitHub profiel</span></a>
-              <a href="tel:+32486699881"><Phone size={16} /><span><small>telefoon</small>+32 486 69 98 81</span></a>
-              <span><MapPin size={16} /><span><small>locatie</small>Heers, Belgie</span></span>
+              <a href="mailto:arjencoenegracht@hotmail.com"><Mail size={16} /><span><small>Email</small>arjencoenegracht@hotmail.com</span></a>
+              <a href="https://www.linkedin.com/in/arjen-coenegracht-0643a92a0/" target="_blank" rel="noreferrer"><LinkedInLogo size={16} /><span><small>LinkedIn</small>LinkedIn profile</span></a>
+              <a href="https://github.com/Arjen-Coenegracht" target="_blank" rel="noreferrer"><GitHubLogo size={16} /><span><small>GitHub</small>GitHub profile</span></a>
+              <a href="tel:+32486699881"><Phone size={16} /><span><small>Phone</small>+32 486 69 98 81</span></a>
+              <span><MapPin size={16} /><span><small>Location</small>Belgium</span></span>
             </div>
           </div>
         </section>
       </main>
 
       <footer>
-        <span>2026 Arjen Coenegracht - ontworpen en gebouwd met zorg</span>
-        <a href="#home">terug naar boven</a>
+        <span>Made with React + Vite</span>
+        <div className="footer-links">
+          <a href="https://github.com/Arjen-Coenegracht" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/arjen-coenegracht-0643a92a0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:arjencoenegracht@hotmail.com">Email</a>
+          <a href="#home">Back to top</a>
+        </div>
       </footer>
     </div>
   );
