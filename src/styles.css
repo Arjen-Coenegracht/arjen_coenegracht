@@ -342,7 +342,7 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1.8fr) minmax(250px, 0.8fr);
   gap: 4.5rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .about-text p,
@@ -374,14 +374,25 @@ main {
 .profile-card {
   display: grid;
   gap: 1rem;
+  position: relative;
+  align-self: stretch;
+  justify-self: end;
+  width: min(100%, 23rem);
+  height: auto;
+  min-height: 0;
   padding: 1.25rem;
+  overflow: hidden;
 }
 
 .profile-card img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  display: block;
+  position: absolute;
+  inset: 1.25rem;
+  width: calc(100% - 2.5rem);
+  height: calc(100% - 2.5rem);
+  min-height: 0;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 25%;
   border-radius: 8px;
   border: 1px solid rgba(245, 244, 240, 0.1);
 }
@@ -483,6 +494,8 @@ main {
   place-items: center;
   aspect-ratio: 16 / 10;
   width: 100%;
+  min-width: 0;
+  overflow: hidden;
   border: 1px solid rgba(245, 244, 240, 0.1);
   border-radius: 8px;
   background:
@@ -493,6 +506,57 @@ main {
   font-family: var(--sans);
   font-size: clamp(1.8rem, 5vw, 3.4rem);
   font-weight: 700;
+}
+
+.project-visual.has-logo {
+  background: rgba(245, 244, 240, 0.035);
+  border-color: rgba(245, 244, 240, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(10, 10, 20, 0.22);
+}
+
+.project-icon-frame {
+  display: grid;
+  place-items: center;
+  width: min(72%, 10rem);
+  height: min(62%, 6.5rem);
+  min-width: 0;
+}
+
+.project-icon-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.project-icon-frame img.smartformfill-logo {
+  transform: translateY(-19%);
+}
+
+.project-icon-frame img.odt-logo {
+  transform: translateY(-21%);
+}
+
+.project-icon-frame img.api-tool-logo {
+  transform: translateY(-20%);
+}
+
+.project-icon-frame img.classified-project-logo {
+  transform: scale(1.35);
+}
+
+.project-icon-fallback {
+  display: grid;
+  place-items: center;
+  width: clamp(4.5rem, 55%, 6.5rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(245, 244, 240, 0.12);
+  border-radius: 16px;
+  background: rgba(245, 244, 240, 0.045);
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  line-height: 1;
 }
 
 .project-badge {
@@ -533,6 +597,30 @@ main {
   margin-top: 1.2rem;
 }
 
+.project-details-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--lavender);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.project-details-toggle:hover {
+  color: var(--off-white);
+}
+
+.project-details-toggle span {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .stack-pill,
 .workflow span {
   padding: 0.32rem 0.75rem;
@@ -568,6 +656,13 @@ main {
 
 .muted-link {
   color: rgba(152, 150, 160, 0.75);
+}
+
+.projects-note {
+  margin: 1.6rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
 }
 
 .timeline {
@@ -791,6 +886,19 @@ footer a:hover {
   .contact-inner {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .profile-card {
+    justify-self: start;
+    width: min(100%, 20rem);
+    height: auto;
+  }
+
+  .profile-card img {
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 
   .skills-grid,

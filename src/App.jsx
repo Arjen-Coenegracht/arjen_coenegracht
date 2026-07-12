@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import {
-  BriefcaseBusiness,
-  Braces,
-  Code2,
+  ClipboardCheck,
   Database,
   Download,
   ExternalLink,
+  FileCode,
   GraduationCap,
   Mail,
-  MapPin,
+  Monitor,
   Phone,
-  ShieldCheck,
+  Server,
   Terminal,
+  Wrench,
 } from 'lucide-react';
-import drawnPortrait from './assets/DrawnArjen.png';
+import apiToolLogo from './assets/api-tool-icon.svg';
+import classifiedProjectLogo from './assets/classified-stamp.png';
+import msqtoLogo from './assets/msqto-icon.svg';
+import odtLogo from './assets/odt-logo.svg';
+import portraitPhoto from './assets/portret_arjen_coenegracht.png';
+import smartFormFillLogo from './assets/smartformfill.png';
 
 function LinkedInLogo({ size = 16 }) {
   return (
@@ -34,19 +39,19 @@ function GitHubLogo({ size = 16 }) {
 const skillGroups = [
   {
     title: 'Languages',
-    icon: Braces,
+    icon: FileCode,
     desc: 'Languages I use to build logic, applications and technical solutions.',
     items: ['Java', 'JavaScript', 'TypeScript', 'SQL', 'Python'],
   },
   {
     title: 'Backend',
-    icon: Terminal,
+    icon: Server,
     desc: 'Backend fundamentals for reliable APIs and maintainable applications.',
     items: ['Spring Boot', 'REST APIs', 'Hibernate', 'Maven', 'Postman'],
   },
   {
     title: 'Frontend',
-    icon: Code2,
+    icon: Monitor,
     desc: 'Interfaces with attention for structure, usability and user experience.',
     items: ['Vue', 'React', 'Tailwind', 'HTML', 'CSS', 'UX/UI'],
   },
@@ -54,72 +59,90 @@ const skillGroups = [
     title: 'Databases',
     icon: Database,
     desc: 'Data modelling, querying and turning information into useful insight.',
-    items: ['MySQL', 'MongoDB', 'Database design', 'ERD', 'Excel'],
+    items: ['MySQL', 'MongoDB', 'SQL', 'ERD'],
   },
   {
     title: 'Testing & Analysis',
-    icon: ShieldCheck,
+    icon: ClipboardCheck,
     desc: 'Quality-focused work from requirements to automated test coverage.',
     items: ['Playwright', 'Manual testing', 'User stories', 'Scrum', 'Agile', 'UML', 'BPMN'],
   },
   {
     title: 'Tools',
-    icon: BriefcaseBusiness,
+    icon: Wrench,
     desc: 'Tools I use for collaboration, documentation, development and reporting.',
-    items: ['Git', 'GitHub', 'Docker', 'Figma', 'Jira', 'Confluence', 'IntelliJ', 'VS Code', 'Power BI'],
+    items: ['Git', 'GitHub', 'Docker', 'Figma', 'Jira', 'Confluence', 'IntelliJ', 'VS Code', 'Power BI', 'Excel'],
   },
 ];
 
 const projects = [
   {
     title: 'MSQTO',
-    badge: 'Internship case study',
-    summary: 'A testing and UX-focused internship project around multitenancy, workflows and software quality.',
-    problem: 'Teams needed more reliable flows, clearer user interaction and better confidence in critical application paths.',
-    solution: 'Improved UX/UI flows, translated requirements into user stories and added automated Playwright tests.',
-    contribution: 'Project management tasks, UX/UI support, user stories, Scrum/Agile coordination and automated testing.',
-    role: 'Software Tester & Software Management Intern',
-    learned: 'How to combine project coordination, user stories, UX decisions and automated testing in a real business context.',
-    tech: ['Playwright', 'Figma', 'Testing', 'UX/UI', 'Multitenancy', 'SQL', 'Scrum', 'Agile'],
+    badge: 'Internship',
+    summary: '',
+    problem: 'MSQTO was a management portal internship project where software management and application development worked together.',
+    solution: 'Supported the portal through UX/UI designs, user stories, automated tests, bug reports and Agile/Scrum coordination.',
+    contribution: 'Created designs, wrote automated Playwright tests, reported bugs, followed up project progress and supported Scrum/Agile workflows.',
+    role: 'Software Management Intern',
+    tech: ['Figma', 'Playwright', 'UX/UI', 'Testing', 'Bug reporting', 'User stories', 'Scrum', 'Agile'],
+    logo: msqtoLogo,
     github: null,
     demo: null,
   },
   {
     title: 'SmartFormFill',
-    badge: 'Business project',
-    summary: 'A form assistance concept focused on reducing repetitive input and improving data quality.',
-    problem: 'Filling in forms manually took time and increased the risk of mistakes.',
+    badge: 'Company collaboration',
+    summary: '',
+    problem: 'For a school course, we worked with a company to develop a project in a multidisciplinary team.',
     solution: 'Designed a structured flow with clearer input handling and automatic suggestions.',
-    contribution: 'Analysis, UX structure, frontend logic and test scenarios.',
-    role: 'Analyst & Frontend Contributor',
-    learned: 'How small UX decisions can reduce friction and make business processes easier to complete.',
-    tech: ['JavaScript', 'Vue', 'Playwright', 'SQL'],
+    contribution: 'Translated company requirements into UX/UI designs, test scenarios and automated Playwright tests. I also reported bugs and helped track the team’s progress.',
+    role: 'Software Management Student in a multidisciplinary project team',
+    tech: ['Figma', 'Playwright', 'UX/UI', 'Testing', 'Bug reporting', 'Analysis', 'Scrum'],
+    logo: smartFormFillLogo,
+    logoClass: 'smartformfill-logo',
+    github: null,
+    demo: null,
+  },
+  {
+    title: 'API-tool',
+    badge: 'Local productivity tool',
+    summary: 'A tool for designing and documenting API contracts before implementing them in our own project.',
+    problem: 'While developing our own project, we needed one clear place to define the APIs before programming them, including the responses we expected for both successful and failed requests.',
+    solution: 'Created a tool where each API endpoint can be prepared in advance with its expected status codes and JSON response structures for success and error scenarios.',
+    contribution: 'Helped define the workflow and structure for documenting endpoints, status codes and expected JSON responses, using AI tools to support problem solving and development.',
+    role: 'Project team member and tool developer',
+    tech: ['Problem solving', 'AI-assisted development'],
+    logo: apiToolLogo,
+    logoClass: 'api-tool-logo',
     github: null,
     demo: null,
   },
   {
     title: 'ZVK Onder den Toren Veulen',
     badge: 'Personal project',
-    summary: 'A club-focused digital platform built with clarity, maintainability and simple content access in mind.',
-    problem: 'The club needed one clear digital place for information and communication.',
-    solution: 'Built an accessible solution with a simple structure and maintainable content flow.',
-    contribution: 'Full project ownership: analysis, development, testing and iterative improvements.',
-    role: 'Full Project Owner',
-    learned: 'How to balance technical implementation with real users who need a simple and reliable website.',
-    tech: ['React', 'GitHub', 'SQL'],
-    github: 'https://github.com/Arjen-Coenegracht',
-    demo: null,
+    summary: 'A complete club website that I designed and developed independently.',
+    problem: 'The club needed one clear and accessible website for matches, players, sponsors, club news and activities.',
+    solution: 'Designed and built a responsive multi-page website with clear navigation and dedicated sections for the club’s content.',
+    contribution: 'Handled the entire project independently, including the visual design, site structure, front-end development, responsive styling, content integration and testing.',
+    role: 'Solo designer and front-end developer',
+    tech: ['Vue', 'TypeScript', 'Vite', 'CSS', 'UX/UI Design'],
+    logo: odtLogo,
+    logoClass: 'odt-logo',
+    github: 'https://github.com/Arjen-Coenegracht/zvk_onderdentorenveulen',
+    demo: 'https://www.zvk-onderdentorenveulen.be/',
+    demoLabel: 'Live site',
   },
   {
-    title: 'Connect 4',
-    badge: 'Java project',
-    summary: 'A game logic project focused on clean structure, edge cases and reliable rule implementation.',
-    problem: 'The goal was to correctly handle game rules, win detection and edge cases.',
-    solution: 'Implemented the core logic with readable code and a structured approach to validation.',
-    contribution: 'Game logic, UI finishing and test-minded checks.',
-    role: 'Java Developer',
-    learned: 'How to think through edge cases and translate rules into maintainable code.',
-    tech: ['Java', 'TypeScript'],
+    title: 'Classified Project',
+    badge: 'In development',
+    summary: 'An ongoing full-stack project developed by a two-person team. More details will be shared when the project is further developed.',
+    problem: 'The project requires a complete and well-structured application. As it is still in development, its purpose and specific functionality are not yet being shared publicly.',
+    solution: 'Working through the full development process, from UML and database design to API development, backend implementation and the complete frontend.',
+    contribution: 'Collaborating in a two-person team across the entire application, including UML models, database structure, APIs, backend logic and frontend development.',
+    role: 'Full-stack developer in a two-person team',
+    tech: ['UML', 'Database design', 'APIs', 'Backend', 'Frontend', 'Full-stack development'],
+    logo: classifiedProjectLogo,
+    logoClass: 'classified-project-logo',
     github: null,
     demo: null,
   },
@@ -199,7 +222,7 @@ function App() {
               </h1>
               <p className="hero-title">Software Management Graduate</p>
               <p className="hero-intro">
-                I build reliable software with a strong focus on quality, testing, data and user experience.
+                I help make software more reliable through quality, testing, data and user experience.
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href="/Arjen-CV.pdf" download><Download size={15} /> Download CV</a>
@@ -229,7 +252,7 @@ function App() {
               </p>
             </div>
             <aside className="profile-card" aria-label="Profile facts">
-              <img src={drawnPortrait} alt="Drawn portrait of Arjen" />
+              <img src={portraitPhoto} alt="Portrait of Arjen Coenegracht" />
             </aside>
           </div>
         </section>
@@ -271,36 +294,54 @@ function App() {
                     aria-expanded={isOpen}
                   >
                     <span className="project-number">#{String(index + 1).padStart(3, '0')}</span>
-                    <span className="project-visual" aria-hidden="true">{project.title.slice(0, 2).toUpperCase()}</span>
+                    <span className={`project-visual ${project.logo ? 'has-logo' : ''}`} aria-hidden="true">
+                      <span className="project-icon-frame">
+                        {project.logo ? (
+                          <img className={project.logoClass || ''} src={project.logo} alt="" />
+                        ) : (
+                          <span className="project-icon-fallback">
+                            {project.title.slice(0, 2).toUpperCase()}
+                          </span>
+                        )}
+                      </span>
+                    </span>
                   </button>
                   <div className="project-content">
                     <p className="project-badge">{project.badge}</p>
                     <h3>{project.title}</h3>
-                    <p>{project.summary}</p>
+                    {project.summary && <p>{project.summary}</p>}
                     <div className="project-stack">
                       {project.tech.map((tag) => (
                         <span className="stack-pill" key={tag}>{tag}</span>
                       ))}
                     </div>
+                    <button
+                      className="project-details-toggle"
+                      type="button"
+                      onClick={() => setOpenProject(isOpen ? '' : project.title)}
+                      aria-expanded={isOpen}
+                    >
+                      {isOpen ? 'Hide details' : 'View details'}
+                      <span aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                    </button>
                     {isOpen && (
                       <div className="project-details">
-                        <p><strong>Problem:</strong> {project.problem}</p>
-                        <p><strong>Solution:</strong> {project.solution}</p>
+                        <p><strong>Context:</strong> {project.problem}</p>
                         <p><strong>My role:</strong> {project.role}</p>
                         <p><strong>What I did:</strong> {project.contribution}</p>
-                        <p><strong>What I learned:</strong> {project.learned}</p>
-                        <div className="project-actions">
-                          {project.github ? (
-                            <a className="project-link" href={project.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={14} /></a>
-                          ) : (
-                            <span className="project-link muted-link">GitHub private</span>
-                          )}
-                          {project.demo ? (
-                            <a className="project-link" href={project.demo} target="_blank" rel="noreferrer">Live Demo <ExternalLink size={14} /></a>
-                          ) : (
-                            <span className="project-link muted-link">Live demo unavailable</span>
-                          )}
-                        </div>
+                        {(project.github || project.demo || project.mockups) && (
+                          <div className="project-actions">
+                            {project.github && (
+                              <a className="project-link" href={project.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={14} /></a>
+                            )}
+                            {project.demo && (
+                              <a className="project-link" href={project.demo} target="_blank" rel="noreferrer">{project.demoLabel || 'Live Demo'} <ExternalLink size={14} /></a>
+                            )}
+                            {project.mockups && (
+                              <span className="project-link muted-link">{project.mockups}</span>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -308,6 +349,9 @@ function App() {
               );
             })}
           </div>
+          <p className="projects-note">
+            Want to know more about one of these projects? Feel free to send me a message.
+          </p>
         </section>
 
         <section id="experience" className="content-section">
@@ -339,6 +383,7 @@ function App() {
             <h2>What I bring</h2>
             <div className="workflow">
               <span>Analytical thinking</span>
+              <span>Problem-solving mindset</span>
               <span>Learning mindset</span>
               <span>Business and IT alignment</span>
               <span>Project-oriented work</span>
@@ -363,7 +408,6 @@ function App() {
               <a href="https://www.linkedin.com/in/arjen-coenegracht-0643a92a0/" target="_blank" rel="noreferrer"><LinkedInLogo size={16} /><span><small>LinkedIn</small>LinkedIn profile</span></a>
               <a href="https://github.com/Arjen-Coenegracht" target="_blank" rel="noreferrer"><GitHubLogo size={16} /><span><small>GitHub</small>GitHub profile</span></a>
               <a href="tel:+32486699881"><Phone size={16} /><span><small>Phone</small>+32 486 69 98 81</span></a>
-              <span><MapPin size={16} /><span><small>Location</small>Belgium</span></span>
             </div>
           </div>
         </section>
