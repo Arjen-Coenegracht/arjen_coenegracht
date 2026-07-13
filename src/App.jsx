@@ -16,7 +16,7 @@ import {
 import clubspotLogo from './assets/clubspot-logo.png';
 import msqtoLogo from './assets/msqto-icon.svg';
 import odtLogo from './assets/odt-logo.svg';
-import portraitPhoto from './assets/portret_arjen_coenegracht.png';
+import portraitPhoto from './assets/arjen-coenegracht-profile.png';
 import smartFormFillLogo from './assets/smartformfill.png';
 import specoraLogo from './assets/specora-logo.png';
 

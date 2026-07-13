@@ -375,9 +375,10 @@ main {
   display: grid;
   gap: 1rem;
   position: relative;
-  align-self: stretch;
+  align-self: start;
   justify-self: end;
   width: min(100%, 23rem);
+  aspect-ratio: 1;
   height: auto;
   min-height: 0;
   padding: 1.25rem;
@@ -391,9 +392,9 @@ main {
   width: calc(100% - 2.5rem);
   height: calc(100% - 2.5rem);
   min-height: 0;
-  object-fit: cover;
-  object-position: center 25%;
-  border-radius: 8px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 50%;
   border: 1px solid rgba(245, 244, 240, 0.1);
 }
 
