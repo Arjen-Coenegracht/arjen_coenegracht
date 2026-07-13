@@ -539,12 +539,12 @@ main {
   transform: translateY(-21%);
 }
 
-.project-icon-frame img.api-tool-logo {
-  transform: translateY(-20%);
+.project-icon-frame img.specora-logo {
+  transform: scale(1.22);
 }
 
-.project-icon-frame img.classified-project-logo {
-  transform: scale(1.35);
+.project-icon-frame img.clubspot-logo {
+  transform: translateY(-15%) scale(1.5);
 }
 
 .project-icon-fallback {

@@ -13,12 +13,12 @@ import {
   Terminal,
   Wrench,
 } from 'lucide-react';
-import apiToolLogo from './assets/api-tool-icon.svg';
-import classifiedProjectLogo from './assets/classified-stamp.png';
+import clubspotLogo from './assets/clubspot-logo.png';
 import msqtoLogo from './assets/msqto-icon.svg';
 import odtLogo from './assets/odt-logo.svg';
 import portraitPhoto from './assets/portret_arjen_coenegracht.png';
 import smartFormFillLogo from './assets/smartformfill.png';
+import specoraLogo from './assets/specora-logo.png';
 
 function LinkedInLogo({ size = 16 }) {
   return (
@@ -104,7 +104,7 @@ const projects = [
     demo: null,
   },
   {
-    title: 'API-tool',
+    title: 'Specora',
     badge: 'Local productivity tool',
     summary: 'A tool for designing and documenting API contracts before implementing them in our own project.',
     problem: 'While developing our own project, we needed one clear place to define the APIs before programming them, including the responses we expected for both successful and failed requests.',
@@ -112,8 +112,8 @@ const projects = [
     contribution: 'Helped define the workflow and structure for documenting endpoints, status codes and expected JSON responses, using AI tools to support problem solving and development.',
     role: 'Project team member and tool developer',
     tech: ['Problem solving', 'AI-assisted development'],
-    logo: apiToolLogo,
-    logoClass: 'api-tool-logo',
+    logo: specoraLogo,
+    logoClass: 'specora-logo',
     github: null,
     demo: null,
   },
@@ -133,16 +133,16 @@ const projects = [
     demoLabel: 'Live site',
   },
   {
-    title: 'Classified Project',
+    title: 'ClubSpot',
     badge: 'In development',
     summary: 'An ongoing full-stack project developed by a two-person team. More details will be shared when the project is further developed.',
     problem: 'The project requires a complete and well-structured application. As it is still in development, its purpose and specific functionality are not yet being shared publicly.',
-    solution: 'Working through the full development process, from UML and database design to API development, backend implementation and the complete frontend.',
-    contribution: 'Collaborating in a two-person team across the entire application, including UML models, database structure, APIs, backend logic and frontend development.',
+    solution: 'Working through the full development process, from ERP analysis, UML and database design to API development, backend implementation and the complete frontend.',
+    contribution: 'Collaborating in a two-person team across the entire application, including ERP flows, UML models, database structure, APIs, backend logic and frontend development.',
     role: 'Full-stack developer in a two-person team',
-    tech: ['UML', 'Database design', 'APIs', 'Backend', 'Frontend', 'Full-stack development'],
-    logo: classifiedProjectLogo,
-    logoClass: 'classified-project-logo',
+    tech: ['ERP', 'UML', 'Database design', 'APIs', 'Backend', 'Frontend', 'Full-stack development'],
+    logo: clubspotLogo,
+    logoClass: 'clubspot-logo',
     github: null,
     demo: null,
   },
