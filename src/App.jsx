@@ -225,7 +225,7 @@ function App() {
                 I help make software more reliable through quality, testing, data and user experience.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary" href="/Arjen-CV.pdf" download><Download size={15} /> Download CV</a>
+                <a className="btn btn-primary" href="/Arjen-CV.pdf" download="Arjen Coenegracht CV.pdf"><Download size={15} /> Download CV</a>
                 <a className="btn btn-ghost" href="#projects">View Projects <ExternalLink size={15} /></a>
                 <a className="btn btn-ghost" href="#contact"><Mail size={15} /> Contact Me</a>
               </div>
